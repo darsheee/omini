@@ -4,12 +4,23 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@unocss/preset-typography": "^0.58.5",
+    "medium-zoom": "^1.1.0",
+    "prettier": "^3.2.5",
+    "sass": "^1.71.0",
+    "unocss": "^0.58.5",
     "vitepress": "1.0.0-alpha.43",
-    "vue": "^3.2.45"
+    "vue": "^3.4.19"
   },
   "scripts": {
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "d": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "p": "vitepress preview docs"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": true,
+    "singleQuote": true,
+    "useTabs": false
   }
 }
