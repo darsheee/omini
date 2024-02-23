@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@vue+shared@3.4.18/node_modules/@vue/shared/dist/shared.esm-bundler.js
+// node_modules/.pnpm/@vue+shared@3.4.19/node_modules/@vue/shared/dist/shared.esm-bundler.js
 function makeMap(str, expectsLowerCase) {
   const set2 = new Set(str.split(","));
   return expectsLowerCase ? (val) => set2.has(val.toLowerCase()) : (val) => set2.has(val);
@@ -283,7 +283,7 @@ var stringifySymbol = (v, i = "") => {
   return isSymbol(v) ? `Symbol(${(_a = v.description) != null ? _a : i})` : v;
 };
 
-// node_modules/.pnpm/@vue+reactivity@3.4.18/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js
+// node_modules/.pnpm/@vue+reactivity@3.4.19/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js
 function warn(msg, ...args) {
   console.warn(`[Vue warn] ${msg}`, ...args);
 }
@@ -1225,6 +1225,7 @@ function markRaw(value) {
 }
 var toReactive = (value) => isObject(value) ? reactive(value) : value;
 var toReadonly = (value) => isObject(value) ? readonly(value) : value;
+var COMPUTED_SIDE_EFFECT_WARN = `Computed is still dirty after getter evaluation, likely because a computed is mutating its own dependency in its getter. State mutations in computed getters should be avoided.  Check the docs for more details: https://vuejs.org/guide/essentials/computed.html#getters-should-be-side-effect-free`;
 var ComputedRefImpl = class {
   constructor(getter, _setter, isReadonly2, isSSR) {
     this._setter = _setter;
@@ -1249,6 +1250,7 @@ var ComputedRefImpl = class {
     }
     trackRefValue(self2);
     if (self2.effect._dirtyLevel >= 2) {
+      warn(COMPUTED_SIDE_EFFECT_WARN);
       triggerRefValue(self2, 2);
     }
     return self2._value;
@@ -1272,7 +1274,7 @@ function computed(getterOrOptions, debugOptions, isSSR = false) {
   if (onlyGetter) {
     getter = getterOrOptions;
     setter = true ? () => {
-      console.warn("Write operation failed: computed value is readonly");
+      warn("Write operation failed: computed value is readonly");
     } : NOOP;
   } else {
     getter = getterOrOptions.get;
@@ -1466,7 +1468,7 @@ var TriggerOpTypes = {
   "CLEAR": "clear"
 };
 
-// node_modules/.pnpm/@vue+runtime-core@3.4.18/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
+// node_modules/.pnpm/@vue+runtime-core@3.4.19/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
 var stack = [];
 function pushWarningContext(vnode) {
   stack.push(vnode);
@@ -1646,13 +1648,11 @@ var ErrorTypeStrings$1 = {
   [14]: "scheduler flush. This is likely a Vue internals bug. Please open an issue at https://github.com/vuejs/core ."
 };
 function callWithErrorHandling(fn, instance, type, args) {
-  let res;
   try {
-    res = args ? fn(...args) : fn();
+    return args ? fn(...args) : fn();
   } catch (err) {
     handleError(err, instance, type);
   }
-  return res;
 }
 function callWithAsyncErrorHandling(fn, instance, type, args) {
   if (isFunction(fn)) {
@@ -5738,8 +5738,16 @@ function validatePropName(key) {
   return false;
 }
 function getType(ctor) {
-  const match = ctor && ctor.toString().match(/^\s*(function|class) (\w+)/);
-  return match ? match[2] : ctor === null ? "null" : "";
+  if (ctor === null) {
+    return "null";
+  }
+  if (typeof ctor === "function") {
+    return ctor.name || "";
+  } else if (typeof ctor === "object") {
+    const name = ctor.constructor && ctor.constructor.name;
+    return name || "";
+  }
+  return "";
 }
 function isSameType(a, b) {
   return getType(a) === getType(b);
@@ -6544,9 +6552,12 @@ function propHasMismatch(el, key, clientValue, vnode, instance) {
         }
       }
     }
-    const cssVars = (_a = instance == null ? void 0 : instance.getCssVars) == null ? void 0 : _a.call(instance);
-    for (const key2 in cssVars) {
-      expectedMap.set(`--${key2}`, String(cssVars[key2]));
+    const root = instance == null ? void 0 : instance.subTree;
+    if (vnode === root || (root == null ? void 0 : root.type) === Fragment && root.children.includes(vnode)) {
+      const cssVars = (_a = instance == null ? void 0 : instance.getCssVars) == null ? void 0 : _a.call(instance);
+      for (const key2 in cssVars) {
+        expectedMap.set(`--${key2}`, String(cssVars[key2]));
+      }
     }
     if (!isMapEqual(actualMap, expectedMap)) {
       mismatchType = mismatchKey = "style";
@@ -9575,7 +9586,7 @@ function isMemoSame(cached, memo) {
   }
   return true;
 }
-var version = "3.4.18";
+var version = "3.4.19";
 var warn2 = true ? warn$1 : NOOP;
 var ErrorTypeStrings = ErrorTypeStrings$1;
 var devtools = true ? devtools$1 : void 0;
@@ -9593,7 +9604,7 @@ var resolveFilter = null;
 var compatUtils = null;
 var DeprecationTypes = null;
 
-// node_modules/.pnpm/@vue+runtime-dom@3.4.18/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js
+// node_modules/.pnpm/@vue+runtime-dom@3.4.19/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js
 var svgNS = "http://www.w3.org/2000/svg";
 var mathmlNS = "http://www.w3.org/1998/Math/MathML";
 var doc = typeof document !== "undefined" ? document : null;
@@ -9958,7 +9969,7 @@ var vShow = {
     }
   },
   updated(el, { value, oldValue }, { transition }) {
-    if (!value === !oldValue && el.style.display === el[vShowOldKey])
+    if (!value === !oldValue && (el.style.display === el[vShowOldKey] || !value))
       return;
     if (transition) {
       if (value) {
@@ -11157,7 +11168,7 @@ var initDirectivesForSSR = () => {
   }
 };
 
-// node_modules/.pnpm/vue@3.4.18/node_modules/vue/dist/vue.runtime.esm-bundler.js
+// node_modules/.pnpm/vue@3.4.19/node_modules/vue/dist/vue.runtime.esm-bundler.js
 function initDev() {
   {
     initCustomFormatter();
@@ -11338,21 +11349,21 @@ export {
 
 @vue/shared/dist/shared.esm-bundler.js:
   (**
-  * @vue/shared v3.4.18
+  * @vue/shared v3.4.19
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
 
 @vue/reactivity/dist/reactivity.esm-bundler.js:
   (**
-  * @vue/reactivity v3.4.18
+  * @vue/reactivity v3.4.19
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
 
 @vue/runtime-core/dist/runtime-core.esm-bundler.js:
   (**
-  * @vue/runtime-core v3.4.18
+  * @vue/runtime-core v3.4.19
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
@@ -11360,7 +11371,7 @@ export {
 
 @vue/runtime-dom/dist/runtime-dom.esm-bundler.js:
   (**
-  * @vue/runtime-dom v3.4.18
+  * @vue/runtime-dom v3.4.19
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
@@ -11368,7 +11379,7 @@ export {
 
 vue/dist/vue.runtime.esm-bundler.js:
   (**
-  * vue v3.4.18
+  * vue v3.4.19
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
