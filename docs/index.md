@@ -26,32 +26,9 @@ hero:
       link: /
 
 features:
-  - icon: 👌
-    title:
-    details:
-  - icon: 🔩
-    title: Extensible
-    details: 
-  - icon: 🔌
-    title: Offline Support
-    details: 
-  - icon: ⚡
-    title: 
-    details: 
-  - icon: 💬
-    title: Prompt for new content
-    details: 
-    link: /guide/prompt-for-update
-    linkText: 
-  - icon: ⚙️
-    title: 
-    details: 
-  - icon: ✨
-    title: Static assets handling
-    details: 
   - icon: 🐞
     title: Development Support
-    details: 
+    details: focus on the basics of the world whrein we strive to be positive
     link: /guide/development
     linkText: Development
   - icon: 🛠️

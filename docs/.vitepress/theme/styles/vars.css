@@ -120,27 +120,7 @@
   --vp-c-text-dark-3: var(--vp-c-text-dark-2);
 }
 
-/* details {
-  font-size: 1.09rem;
-  padding: 0px;
-  text-wrap: ;
-}
-details p {
-  font-size: 1.09rem;
-  line-height: 22px;
-  text-wrap: ;
-}
-details li {
-  font-size: 1.09rem;
-  line-height: 22px;
-  text-wrap: ;
-} */
 
-/* .dark {
-  --vp-custom-block-details-border: #212529;
-  --vp-custom-block-details-text: #212529;
-  --vp-custom-block-details-bg: #f8f9fa;
-} */
 
 :root {
   /* --vp-custom-block-details-padding: 0px 0px 0px; */
