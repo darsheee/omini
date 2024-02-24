@@ -1,8 +1,11 @@
 import { defineConfig } from 'vitepress'
 
+export const META_URL = 'https://upsc.study.vercel.app/'
 
-const ogUrl = 'https://upsc.study.vercel.app/'
-const ogImage = `${ogUrl}og-image.png`
+export const META_TITLE = 'Upsc.Study 🍍'
+export const META_DESCRIPTION =
+  'UPSC Study Material'
+  export const META_IMAGE = 'https://pinia.vuejs.org/social.png'
 
 export default (defineConfig({
   lang: 'en-US',
@@ -23,17 +26,17 @@ export default (defineConfig({
       name: 'keywords',
       content: 'UPSC, UPSC Prelims, UPSC study materials, gs-1, general studies, gs paper',
     }],
-    ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'Upsc.study' }],
-    ['meta', { property: 'og:image', content: ogImage }],
-    ['meta', { property: 'og:description', content: 'UPSC Prelims' }],
-    ['meta', { property: 'og:url', content: ogUrl }],
-    ['meta', { name: 'twitter:description', content: '' }],
-    ['meta', { name: 'twitter:title', content: 'Upsc.study' }],
-    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:image', content: ogImage }],
-    ['meta', { name: 'twitter:site', content: 'upsc.study' }],
-    ['meta', { name: 'twitter:url', content: ogUrl }],
+    // ['meta', { property: 'og:type', content: 'website' }],
+    // ['meta', { property: 'og:title', content: 'Upsc.study' }],
+    // ['meta', { property: 'og:image', content: ogImage }],
+    // ['meta', { property: 'og:description', content: 'UPSC Prelims' }],
+    // ['meta', { property: 'og:url', content: ogUrl }],
+    // ['meta', { name: 'twitter:description', content: '' }],
+    // ['meta', { name: 'twitter:title', content: 'Upsc.study' }],
+    // ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    // ['meta', { name: 'twitter:image', content: ogImage }],
+    // ['meta', { name: 'twitter:site', content: 'upsc.study' }],
+    // ['meta', { name: 'twitter:url', content: ogUrl }],
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' }],
   ],
   lastUpdated: true,

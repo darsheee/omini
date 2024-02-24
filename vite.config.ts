@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, Plugin  } from 'vite'
 
 import Unocss from 'unocss/vite'
 
