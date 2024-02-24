@@ -1,11 +1,6 @@
 import { defineConfig } from 'vitepress'
 
-export const META_URL = 'https://upsc.study.vercel.app/'
-
-export const META_TITLE = 'Upsc.Study 🍍'
-export const META_DESCRIPTION =
-  'UPSC Study Material'
-  export const META_IMAGE = 'https://pinia.vuejs.org/social.png'
+export const META_URL = 'https://pinia.vuejs.org'
 
 
 const ogUrl = 'https://upsc.study.vercel.app/'
@@ -38,7 +33,7 @@ export default (defineConfig({
     ['meta', { name: 'twitter:description', content: '' }],
     ['meta', { name: 'twitter:title', content: 'Upsc.study' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:image', content: ogImage }],
+    ['meta', { name: 'twitter:image', content: 'https://pinia.vuejs.org/social.png' }],
     ['meta', { name: 'twitter:site', content: 'upsc.study' }],
     ['meta', { name: 'twitter:url', content: ogUrl }],
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' }],
