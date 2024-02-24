@@ -42,7 +42,7 @@ export default (defineConfig({
   markdown: {
     theme: {
       light: 'vitesse-light',
-      dark: 'vitesse-dark',
+      dark: 'dracula-soft',
     },
   },
   ignoreDeadLinks: true,

@@ -67,6 +67,12 @@
    --vp-c-highlight-text: var(--vp-c-bg);
 }
 
+.dark {
+  --vp-c-bg: #2c3639;
+  
+  --vp-c-bg-alpha-with-backdrop: rgba(44, 54, 57, 0.7);
+  --vp-avator-border: #3f4e4f;
+}
 
 
 
@@ -388,4 +394,46 @@ a.sidebar-link-item.active {
 a.sidebar-link-item {
   font-family: monospace;
   letter-spacing: -0.5px;
+}
+
+h2 {
+  border-image: linear-gradient(0deg, hsl(44, 30%, 75%) 5px, #0000 0) fill 0;
+  padding: 3px 0;
+  width: max-content;
+}
+
+h3 {
+  --c:   oklch(84.52% 0.13 164.98);
+
+border-image: 
+  conic-gradient(from 45deg at calc(100% - 1lh),#0000 25%,var(--c) 0) 
+  fill 0 0 0 0 100vw;
+padding-right: 1.3lh;
+line-height: 1.5em; /* control the height */ 
+width: fit-content; /* you probably don't need this if your element is already shrink-to-fit*/
+}
+
+@supports not (padding: 1lh) { /* in case the lh unit is not available fallback to em */
+.ribbon {
+ border-image: 
+    conic-gradient(from 45deg at calc(100% - 1.5em) 50%,#0000 25%,var(--c) 0) 
+    fill 0 0 0 0 100vw;
+ padding-right: 2em; 
+}
+}
+
+
+
+
+
+strong {
+  font-weight: 700;
+  color: #800000; 
+}
+
+hr{
+color: #800000; 
+}
+.hr data-v-1d1be3ba  {
+font-color: #800000;
 }
